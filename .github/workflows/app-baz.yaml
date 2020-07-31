@@ -1,0 +1,67 @@
+name: Build, Deploy Baz
+
+on:
+  push:
+    branches:
+      - 'master'
+      - 'dev/*'
+    paths:
+      - 'apps/baz/**'
+
+env:
+  IMAGE: docker.pkg.github.com/${{ github.repository }}/baz:${{ github.sha }}
+
+jobs:
+  build-jar-docker:
+    name: build-jar-docker
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/heads/dev')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.1
+      - name: Cache Depdendencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-maven-
+      - name: JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 14
+      - name: Build
+        run: mvn clean package --projects :baz --also-make --threads=2 --batch-mode
+      - name: Build and publish Docker image
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          docker build --tag ${IMAGE} --build-arg JAR_PATH=apps/baz/target/app.jar .
+          docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
+          docker push ${IMAGE}
+
+# We had a custom GitHub Action to deploy to our Kubernetes cluster.
+# Examples:
+#
+#  deploy-dev:
+#    name: Deploy to Dev
+#    needs: build-jar-docker
+#    if: startsWith(github.ref, 'refs/heads/dev') || github.ref == 'refs/heads/master'
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2.3.1
+#      - uses: Deploy Action
+#        env:
+#          CLUSTER: dev-fss
+#          RESOURCE: Points to k8s resource
+#
+#  deploy-prod:
+#    name: Deploy to Prod
+#    needs: build-jar-docker
+#    if: github.ref == 'refs/heads/master'
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2.3.1
+#      - uses:Deploy Action
+#        env:
+#          CLUSTER: prod-fss
+#          RESOURCE: Points to k8s resource

@@ -1,0 +1,31 @@
+name: Build Side Branch
+
+on:
+  push:
+    branches:
+      - '**'
+      - '!dev/*'
+      - '!master'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.1
+      - name: Cache Depdendencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-maven-
+      - name: JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 14
+      - name: Build
+        run: mvn clean test --threads=2 --batch-mode
+      - name: Lint Code Base
+        uses: docker://github/super-linter:v2.1.0
+        env:
+          VALIDATE_ALL_CODEBASE: false

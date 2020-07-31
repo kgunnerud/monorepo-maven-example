@@ -1,0 +1,6 @@
+# This config will just have any effect if the application uses Actuator, so this is a convenient way to put up defaults / according to your convention, but not force it.
+management:
+  endpoint:
+    health.show-details: always
+  endpoints.web:
+    exposure.include: prometheus,health

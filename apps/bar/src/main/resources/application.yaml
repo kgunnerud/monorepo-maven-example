@@ -1,0 +1,3 @@
+server.port: 8080
+
+example.libs.utils.auditing.enabled: true

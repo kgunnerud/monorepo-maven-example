@@ -1,0 +1,13 @@
+= Example
+:sectnums:
+:sectanchors:
+:toc: left
+:toclevels: 2
+:toc-title: Content
+:icons: font
+
+== Overview
+
+Pewew
+
+include::test/nested.adoc[leveloffset=2]

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>monorepo-maven-example</artifactId>
+        <groupId>com.github.kgunnerud.example</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>docs</artifactId>
+    <name>Example :: Docs</name>
+
+    <profiles>
+        <profile>
+            <!-- Profile is used just to not build on regular builds, e.g. side branches or other cases where building documentation is not wanted. -->
+            <id>build-docs</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.asciidoctor</groupId>
+                        <artifactId>asciidoctor-maven-plugin</artifactId>
+                        <version>${asciidoc.version}</version>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                            <backend>html5</backend>
+                            <doctype>docbook</doctype>
+                            <preserveDirectories>true</preserveDirectories>
+                            <relativeBaseDir>true</relativeBaseDir>
+                            <imagesDir>./</imagesDir>
+                        </configuration>
+
+                        <executions>
+                            <execution>
+                                <id>output-html</id>
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>process-asciidoc</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

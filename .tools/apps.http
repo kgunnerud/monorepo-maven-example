@@ -1,0 +1,28 @@
+# Can make many files, just one here as an example.
+
+# Bar
+// @no-log
+// @no-cookie-jar
+GET http://localhost:8080/bar
+
+###
+
+// @no-log
+// @no-cookie-jar
+GET http://localhost:8080/fooByProxy
+
+###
+
+# Baz
+// @no-log
+// @no-cookie-jar
+GET http://localhost:8081/baz
+
+###
+
+# Foo
+// @no-log
+// @no-cookie-jar
+GET http://localhost:8082/foo
+
+###
