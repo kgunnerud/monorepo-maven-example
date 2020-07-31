@@ -17,7 +17,6 @@ public class BazApp {
 
     @GetMapping("baz")
     BazDto baz() {
-
         return new BazDto(Long.MAX_VALUE);
     }
 }

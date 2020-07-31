@@ -18,7 +18,6 @@ public class FooApp {
 
     @GetMapping("foo")
     FooDto foo() {
-
         return new FooDto("A Name");
     }
 }
