@@ -28,7 +28,7 @@ jobs:
       # It seems that regular users cannot use gh-pages branch, so this will just be here as an example.
       - name: Deploy
         if: success()
-        uses: crazy-max/ghaction-github-pages@v2.1.1
+        uses: crazy-max/ghaction-github-pages@v2.4.1
         with:
           target_branch: gh-pages
           build_dir: public
