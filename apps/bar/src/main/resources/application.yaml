@@ -1,3 +1,5 @@
 server.port: 8080
 
 example.libs.utils.auditing.enabled: true
+
+spring.config.import: classpath:common-app.yaml

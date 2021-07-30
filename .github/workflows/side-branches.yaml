@@ -22,7 +22,7 @@ jobs:
       - name: JDK
         uses: actions/setup-java@v2.1.0
         with:
-          java-version: 14
+          java-version: 16
       - name: Build
         run: mvn clean test --threads=2 --batch-mode
       - name: Lint Code Base

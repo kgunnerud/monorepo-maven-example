@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.2.RELEASE</version>
+        <version>2.5.3</version>
     </parent>
 
     <groupId>com.github.kgunnerud.example</groupId>
@@ -24,7 +24,7 @@
 
     <properties>
         <asciidoc.version>2.2.1</asciidoc.version>
-        <java.version>14</java.version>
+        <java.version>16</java.version>
     </properties>
 
     <dependencies>

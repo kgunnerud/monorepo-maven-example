@@ -1,0 +1,6 @@
+Foo:
+  extends: .jdk-build
+  variables:
+    APP_NAME: 'foo'
+    APP_ROOT_FOLDER: 'apps/foo'
+

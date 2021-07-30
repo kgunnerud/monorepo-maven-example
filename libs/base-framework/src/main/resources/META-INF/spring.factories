@@ -1,4 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.github.kgunnerud.example.libs.common.utils.properties.PropertiesAutoConfig,\
   com.github.kgunnerud.example.libs.common.utils.auditing.AuditAutoConfig,\
   com.github.kgunnerud.example.libs.common.utils.health.HealthMetricsAutoConfig
