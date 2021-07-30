@@ -17,9 +17,8 @@ jobs:
       - name: JDK
         uses: actions/setup-java@v1
         with:
-          java-version: 14
+          java-version: 16
       - name: Build
-        env:
         run: mvn clean package --projects :docs --batch-mode -Pbuild-docs
       - name: Move
         run: |

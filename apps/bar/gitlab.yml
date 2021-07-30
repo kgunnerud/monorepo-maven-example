@@ -1,0 +1,15 @@
+Bar:
+  extends: .jdk-build
+  variables:
+    APP_NAME: 'bar'
+    APP_ROOT_FOLDER: 'apps/bar'
+
+Bar-Prod:
+  extends: .deploy
+  variables:
+    APP_ROOT_FOLDER: 'apps/bar'
+
+Bar-Test:
+  extends: .deploy
+  variables:
+    APP_ROOT_FOLDER: 'apps/bar'

@@ -1,0 +1,29 @@
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  REVISION: '$CI_PIPELINE_IID-$CI_COMMIT_SHORT_SHA'
+  MAVEN_OPTS: '-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository'
+
+cache:
+  paths:
+    - './.m2/repository/'
+
+include:
+  - local: '.gitlab/templates.yml'
+  - local: 'apps/bar/gitlab.yml'
+  - local: 'apps/baz/gitlab.yml'
+  - local: 'apps/foo/gitlab.yml'
+
+# Only side-branches
+Build All Maven Modules:
+  stage: build
+  image: maven:3.8.1-adoptopenjdk-16
+  script:
+    - 'mvn test $MAVEN_CLI_OPTS'
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+      when: never
+    - when: always

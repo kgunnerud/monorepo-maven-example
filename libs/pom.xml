@@ -14,7 +14,7 @@
     <name>Example :: Libs</name>
 
     <modules>
-        <module>common-utils</module>
+        <module>base-framework</module>
         <module>contract-json</module>
     </modules>
 

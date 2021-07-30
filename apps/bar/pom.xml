@@ -16,7 +16,7 @@
     <dependencies>
         <dependency>
             <groupId>com.github.kgunnerud.example</groupId>
-            <artifactId>common-utils</artifactId>
+            <artifactId>base-framework</artifactId>
             <version>${project.version}</version>
         </dependency>
 

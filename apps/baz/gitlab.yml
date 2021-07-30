@@ -1,0 +1,6 @@
+Baz:
+  extends: .jdk-build
+  variables:
+    APP_NAME: 'baz'
+    APP_ROOT_FOLDER: 'apps/baz'
+

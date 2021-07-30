@@ -1,0 +1,27 @@
+.jdk-build:
+  stage: build
+  image: maven:3.8.1-adoptopenjdk-16
+  variables:
+    APP_NAME: specify
+    APP_ROOT_FOLDER: specify
+  script:
+    - 'mvn package -am -pl :$APP_NAME $MAVEN_CLI_OPTS -T 8'
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+      changes:
+        - '$APP_ROOT_FOLDER/**/*'
+    - if: '$CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH'
+      when: manual
+
+.jdk-build-incl-jib:
+  extends: .jdk-build
+  script:
+    - 'mvn package -am -pl :$APP_NAME $MAVEN_CLI_OPTS $JIB_PROPS jib:build -T 8'
+
+.deploy:
+  stage: deploy
+  image: WhatYouNeed
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+      changes:
+        - '$APP_ROOT_FOLDER/**/*'
