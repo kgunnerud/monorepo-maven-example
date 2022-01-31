@@ -23,7 +23,7 @@
     </modules>
 
     <properties>
-        <asciidoc.version>2.2.1</asciidoc.version>
+        <asciidoc.version>2.2.2</asciidoc.version>
         <java.version>16</java.version>
     </properties>
 
